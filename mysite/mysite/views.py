@@ -12,13 +12,27 @@ def home(request):
 def text_analyse(request):
 
 	txt=request.POST.get('text','default')
+
 	removepunc=request.POST.get('removepun','off')
+
 	cap=request.POST.get('upper','off')
+
 	nline=request.POST.get('newline','off')
+
 	nspace=request.POST.get('space','off')	
+
 	ccount=request.POST.get('ccount','off')
+
+	spell=request.POST.get('spell','off')
+
+	sentimental=request.POST.get('senti','off')
+
+	pos=request.POST.get('speech','off')
+
 	count=0
-	PUNCTUATION ='''!()/[]-{*+}?~%'\^|#><@,$&"'''
+
+	PUNCTUATION =''' !()/[]-{*+}?~%'\^|#><@,$&" '''
+
 	ntxt=''
 	
 	
@@ -58,6 +72,24 @@ def text_analyse(request):
 				count+=1
 		ntxt=ntxt+str(count)
 	
+	elif(spell=='on'):
+		purpose="Check Spelling of given text"
+		blob_obj=TextBlob(txt)
+		ntxt=blob_obj.correct()
+
+	elif(pos=='on'):
+		purpose='Identifying Parts of Speech'
+		blob_obj=TextBlob(txt)
+		ll=[]
+		for words,tag in blob_obj.tags:
+			ll.append([words,tag])
+		ntxt=ll
+
+	elif(sentimental=='on'):
+		purpose='Sentimental Analysis'
+		blob_obj=TextBlob(txt)
+		ntxt=blob_obj.sentiment
+
 	parms={
 		'analyszed':ntxt,'purpose':purpose
 	}
