@@ -25,7 +25,7 @@ SECRET_KEY = '^)3e3%%5+f3tluk)#rots--!d0svpe^!$l%aepb2b6hdsbx+c$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','textanalyses.herokuapp.com']
 
 
 # Application definition
